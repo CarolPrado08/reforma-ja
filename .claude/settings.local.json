@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh api:*)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(npm --version)",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --no-src-dir --import-alias \"@/*\" --yes)",
+      "Bash(cd /tmp)",
+      "Bash(npx create-next-app@latest reforma-ja --typescript --tailwind --eslint --app --no-src-dir --import-alias \"@/*\" --yes)",
+      "Bash(WORKTREE=\"C:/Users/carol/Downloads/Reforma-já/.claude/worktrees/inspiring-neumann\")",
+      "Bash(cp /tmp/reforma-ja/package.json \"$WORKTREE/\")",
+      "Bash(cp /tmp/reforma-ja/package-lock.json \"$WORKTREE/\")",
+      "Bash(cp /tmp/reforma-ja/next.config.ts \"$WORKTREE/\")",
+      "Bash(cp /tmp/reforma-ja/tsconfig.json \"$WORKTREE/\")",
+      "Bash(npm install:*)",
+      "Bash(npx prisma:*)",
+      "Bash(npx shadcn@latest init --defaults)"
+    ]
+  }
+}
