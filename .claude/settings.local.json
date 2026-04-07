@@ -14,7 +14,12 @@
       "Bash(cp /tmp/reforma-ja/tsconfig.json \"$WORKTREE/\")",
       "Bash(npm install:*)",
       "Bash(npx prisma:*)",
-      "Bash(npx shadcn@latest init --defaults)"
+      "Bash(npx shadcn@latest init --defaults)",
+      "Bash(npx shadcn@latest add card input label select tabs badge dialog separator sheet progress)",
+      "Bash(npx shadcn@latest add dropdown-menu table avatar tooltip)",
+      "Bash(npx storybook@latest init --yes)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run:*)"
     ]
   }
 }
