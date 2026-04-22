@@ -97,6 +97,8 @@ model Orcamento {
   id              String          @id @default(cuid())
   userId          String
   modo            OrcamentoModo
+  nomeCliente     String?
+  telefoneCliente String?
   comodo          String
   tipoServico     String
   metragem        Float

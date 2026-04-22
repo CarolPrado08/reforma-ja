@@ -7,7 +7,7 @@ const empresaSchema = z.object({
   nomeEmpresa: z.string().min(1, "Nome da empresa é obrigatório"),
   cnpj: z.string().optional(),
   telefone: z.string().optional(),
-  logoUrl: z.string().url().optional().or(z.literal("")),
+  logoUrl: z.string().optional(),
 })
 
 export async function PATCH(req: NextRequest) {

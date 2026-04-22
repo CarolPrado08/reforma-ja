@@ -60,6 +60,8 @@ export async function POST(req: NextRequest) {
     data: {
       userId: session.user.id,
       modo,
+      nomeCliente: data.nomeCliente || null,
+      telefoneCliente: data.telefoneCliente || null,
       comodo: data.comodo,
       tipoServico: data.tipoServico,
       metragem: data.metragem,

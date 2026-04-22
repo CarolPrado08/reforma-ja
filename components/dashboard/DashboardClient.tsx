@@ -4,7 +4,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { PlusCircle, FileText, Clock, CheckCircle, XCircle, Send, Building2 } from "lucide-react"
+import { PlusCircle, FileText, Clock, CheckCircle, XCircle, Send, Building2, Phone } from "lucide-react"
 import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
 
@@ -128,6 +128,16 @@ export function DashboardClient({ orcamentos, user }: Props) {
                           <FileText className="w-5 h-5" style={{color:"#3B6D11"}} />
                         </div>
                         <div>
+                          {isProfissional && o.nomeCliente && (
+                            <div className="flex items-center gap-1.5 mb-0.5">
+                              <p className="font-semibold text-sm" style={{ color: "#1a5c2a" }}>{o.nomeCliente}</p>
+                              {o.telefoneCliente && (
+                                <span className="flex items-center gap-0.5 text-xs text-gray-400">
+                                  <Phone className="w-3 h-3" />{o.telefoneCliente}
+                                </span>
+                              )}
+                            </div>
+                          )}
                           <p className="font-medium text-sm">{o.comodo} — {o.tipoServico}</p>
                           <p className="text-gray-400 text-xs mt-0.5">
                             {o.metragem}m² · {o.regiao} · {format(new Date(o.createdAt), "dd/MM/yyyy", { locale: ptBR })}
