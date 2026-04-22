@@ -6,7 +6,19 @@ export default async function AprovarOrcamentoPage({ params }: { params: Promise
   const { token } = await params
   const orcamento = await db.orcamento.findFirst({
     where: { linkAprovacao: token },
-    include: { itens: true, user: { select: { name: true, email: true } } },
+    include: {
+      itens: true,
+      user: {
+        select: {
+          name: true,
+          email: true,
+          nomeEmpresa: true,
+          cnpj: true,
+          logoUrl: true,
+          telefone: true,
+        },
+      },
+    },
   })
 
   if (!orcamento) notFound()
