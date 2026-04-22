@@ -1,247 +1,480 @@
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Check, Calculator, FileText, BarChart3, Zap, Shield } from "lucide-react"
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-white">
-      {/* Navbar */}
-      <nav className="border-b border-gray-100 bg-white/80 backdrop-blur-sm sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{background:"#3B6D11"}}>
-              <span className="text-white font-bold text-sm">R</span>
-            </div>
-            <span className="font-bold text-xl" style={{color:"#2C2C2A"}}>ReformaJá</span>
+    <div style={{ fontFamily: "'Inter', system-ui, sans-serif", color: "#0f1923", background: "#ffffff" }}>
+
+      {/* ── NAVBAR ── */}
+      <nav style={{
+        height: 64,
+        background: "#ffffff",
+        borderBottom: "1px solid #ebebeb",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        padding: "0 48px",
+        position: "sticky",
+        top: 0,
+        zIndex: 50,
+      }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <div style={{
+            width: 32, height: 32, background: "#1a5c2a", borderRadius: 8,
+            display: "flex", alignItems: "center", justifyContent: "center",
+          }}>
+            <span style={{ color: "#fff", fontSize: 14, fontWeight: 700 }}>R</span>
           </div>
-          <div className="flex items-center gap-3">
-            <Link href="/login">
-              <Button variant="ghost" className="text-gray-600">Entrar</Button>
-            </Link>
-            <Link href="/login">
-              <Button style={{background:"#3B6D11", color:"white"}} className="hover:opacity-90">
-                Começar grátis
-              </Button>
-            </Link>
-          </div>
+          <span style={{ fontSize: 16, fontWeight: 600, color: "#0f1923" }}>ReformaJá</span>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
+          <a href="#features" style={{ fontSize: 14, color: "#5c5c7a", textDecoration: "none" }}>Funcionalidades</a>
+          <a href="#como-funciona" style={{ fontSize: 14, color: "#5c5c7a", textDecoration: "none" }}>Como funciona</a>
+          <a href="#pricing" style={{ fontSize: 14, color: "#5c5c7a", textDecoration: "none" }}>Planos</a>
+          <Link href="/login" style={{
+            backgroundColor: "#1a5c2a",
+            color: "#ffffff",
+            border: "2px solid #1a5c2a",
+            borderRadius: 8,
+            padding: "10px 22px",
+            fontSize: 14,
+            fontWeight: 600,
+            textDecoration: "none",
+            cursor: "pointer",
+          }}>
+            Começar grátis
+          </Link>
         </div>
       </nav>
 
-      {/* Hero */}
-      <section className="relative overflow-hidden" style={{background:"linear-gradient(135deg, #3B6D11 0%, #639922 100%)"}}>
-        <div className="max-w-6xl mx-auto px-4 py-24 text-center">
-          <Badge className="mb-6 bg-white/20 text-white border-white/30 hover:bg-white/20">
-            ✨ Grátis para moradores
-          </Badge>
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-            Seu orçamento de reforma<br />em minutos
+      {/* ── HERO ── */}
+      <section style={{ background: "#fafaf8", padding: "96px 48px 80px", textAlign: "center" }}>
+        <div style={{ maxWidth: 960, margin: "0 auto" }}>
+          <div style={{
+            display: "inline-flex", alignItems: "center", gap: 6,
+            background: "#eaf3de", borderRadius: 100, padding: "5px 14px",
+            marginBottom: 28,
+          }}>
+            <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#1a5c2a", display: "inline-block" }} />
+            <span style={{ fontSize: 12, fontWeight: 600, color: "#27500a" }}>Grátis para moradores</span>
+          </div>
+
+          <h1 style={{
+            fontSize: 48, fontWeight: 700, letterSpacing: "-1.5px", lineHeight: 1.12,
+            color: "#0f1923", marginBottom: 20, margin: "0 0 20px",
+          }}>
+            Orçamentos de reforma<br />
+            <span style={{ color: "#1a5c2a" }}>precisos e profissionais</span>
           </h1>
-          <p className="text-xl text-green-100 mb-10 max-w-2xl mx-auto">
-            Chega de surpresas na obra. Calcule materiais, mão de obra e prazos antes de começar — seja você morador ou profissional autônomo.
+
+          <p style={{
+            fontSize: 18, fontWeight: 400, lineHeight: 1.65, color: "#5c5c7a",
+            maxWidth: 520, margin: "0 auto 36px",
+          }}>
+            Calcule materiais, mão de obra e prazos em minutos. Para moradores e profissionais autônomos.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/login">
-              <Button size="lg" className="bg-white text-green-800 hover:bg-green-50 font-semibold px-8">
-                Calcular meu orçamento grátis
-              </Button>
+
+          <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap", marginBottom: 20 }}>
+            <Link href="/login" style={{
+              backgroundColor: "#1a5c2a",
+              color: "#ffffff",
+              border: "2px solid #1a5c2a",
+              borderRadius: 8,
+              padding: "13px 28px",
+              fontSize: 15,
+              fontWeight: 600,
+              textDecoration: "none",
+              cursor: "pointer",
+            }}>
+              Calcular meu orçamento grátis
             </Link>
-            <Link href="#features">
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
-                Ver como funciona
-              </Button>
+            <Link href="/login" style={{
+              backgroundColor: "#ffffff",
+              color: "#0f1923",
+              border: "2px solid #d0d0d0",
+              borderRadius: 8,
+              padding: "13px 28px",
+              fontSize: 15,
+              fontWeight: 600,
+              textDecoration: "none",
+              cursor: "pointer",
+            }}>
+              Ver demonstração
             </Link>
           </div>
-          <p className="text-green-200 text-sm mt-6">Sem cartão de crédito • 1 orçamento gratuito para moradores</p>
+
+          <p style={{ fontSize: 13, color: "#9999b0", margin: 0 }}>
+            Sem cartão de crédito · 1 orçamento gratuito para moradores
+          </p>
         </div>
       </section>
 
-      {/* Features */}
-      <section id="features" className="py-20 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4" style={{color:"#2C2C2A"}}>Tudo que você precisa para uma obra sem surpresas</h2>
-            <p className="text-gray-500 max-w-xl mx-auto">Do cálculo ao PDF profissional, o ReformaJá cobre cada etapa do seu orçamento.</p>
+      {/* ── SOCIAL PROOF ── */}
+      <section style={{ background: "#ffffff", borderBottom: "1px solid #ebebeb", padding: "36px 48px" }}>
+        <div style={{ maxWidth: 960, margin: "0 auto", display: "flex", justifyContent: "center", gap: 56, flexWrap: "wrap" }}>
+          {[
+            { num: "4.800+", label: "Orçamentos gerados" },
+            { num: "1.200+", label: "Profissionais ativos" },
+            { num: "R$12M+", label: "Em obras orçadas" },
+            { num: "4.9/5", label: "Avaliação média" },
+          ].map(({ num, label }) => (
+            <div key={label} style={{ textAlign: "center" }}>
+              <p style={{ fontSize: 26, fontWeight: 700, color: "#0f1923", letterSpacing: "-0.5px", margin: 0 }}>{num}</p>
+              <p style={{ fontSize: 12, color: "#9999b0", margin: "2px 0 0" }}>{label}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── FEATURES ── */}
+      <section id="features" style={{ background: "#ffffff", padding: "80px 48px" }}>
+        <div style={{ maxWidth: 960, margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: 48 }}>
+            <p style={{ fontSize: 12, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", color: "#1a5c2a", margin: "0 0 10px" }}>
+              Funcionalidades
+            </p>
+            <h2 style={{ fontSize: 34, fontWeight: 700, letterSpacing: "-0.8px", lineHeight: 1.2, color: "#0f1923", margin: "0 0 12px" }}>
+              Tudo que você precisa para uma obra sem surpresas
+            </h2>
+            <p style={{ fontSize: 16, color: "#5c5c7a", lineHeight: 1.6, maxWidth: 520, margin: "0 auto" }}>
+              Do cálculo ao PDF profissional, o ReformaJá cobre cada etapa do seu orçamento.
+            </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
             {[
               {
-                icon: <Calculator className="w-6 h-6" />,
-                title: "Formulário Inteligente",
-                desc: "Selecione modo (Morador ou Profissional), cômodo, tipo de serviço, metragem e região em etapas guiadas.",
+                icon: (
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <rect x="2" y="2" width="7" height="7" rx="1.5" fill="#3b6d11" />
+                    <rect x="11" y="2" width="7" height="7" rx="1.5" fill="#3b6d11" />
+                    <rect x="2" y="11" width="7" height="7" rx="1.5" fill="#3b6d11" />
+                    <rect x="11" y="11" width="7" height="7" rx="1.5" fill="#3b6d11" />
+                  </svg>
+                ),
+                title: "Formulário inteligente",
+                text: "Selecione cômodo, tipo de serviço, metragem e região em etapas guiadas e simples.",
               },
               {
-                icon: <Zap className="w-6 h-6" />,
-                title: "Motor de Cálculo",
-                desc: "Preços de materiais por região, estimativa de mão de obra e margem de imprevisto configurável.",
+                icon: (
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="10" r="8" stroke="#3b6d11" strokeWidth="1.8" />
+                    <path d="M10 6v4l3 2" stroke="#3b6d11" strokeWidth="1.8" strokeLinecap="round" />
+                  </svg>
+                ),
+                title: "Motor de cálculo",
+                text: "Preços de materiais atualizados por região, mão de obra estimada e margem de imprevisto configurável.",
               },
               {
-                icon: <BarChart3 className="w-6 h-6" />,
-                title: "Comparativo de Materiais",
-                desc: "Cerâmica vs Porcelanato vs Vinílico: veja preço, durabilidade e dificuldade de instalação.",
+                icon: (
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <polyline points="2,14 7,9 11,12 18,4" stroke="#3b6d11" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                ),
+                title: "Comparativo de materiais",
+                text: "Compare cerâmica, porcelanato e vinílico por preço, durabilidade e dificuldade de instalação.",
               },
               {
-                icon: <FileText className="w-6 h-6" />,
-                title: "PDF Profissional",
-                desc: "Relatório simples para moradores e proposta comercial com logo para profissionais.",
+                icon: (
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <rect x="4" y="2" width="12" height="16" rx="2" stroke="#3b6d11" strokeWidth="1.8" />
+                    <line x1="7" y1="7" x2="13" y2="7" stroke="#3b6d11" strokeWidth="1.5" strokeLinecap="round" />
+                    <line x1="7" y1="10" x2="13" y2="10" stroke="#3b6d11" strokeWidth="1.5" strokeLinecap="round" />
+                    <line x1="7" y1="13" x2="11" y2="13" stroke="#3b6d11" strokeWidth="1.5" strokeLinecap="round" />
+                  </svg>
+                ),
+                title: "PDF profissional",
+                text: "Gere propostas comerciais com sua logo, validade do orçamento e condições de pagamento.",
               },
               {
-                icon: <Shield className="w-6 h-6" />,
-                title: "Dashboard Completo",
-                desc: "Histórico de orçamentos, status (rascunho, enviado, aprovado, recusado) e link de aprovação.",
+                icon: (
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M10 2l2 5h5l-4 3 1.5 5L10 12l-4.5 3L7 10 3 7h5z" stroke="#3b6d11" strokeWidth="1.8" strokeLinejoin="round" fill="none" />
+                  </svg>
+                ),
+                title: "Link de aprovação",
+                text: "Envie um link para seu cliente aprovar ou recusar o orçamento diretamente pelo celular.",
               },
               {
-                icon: <Check className="w-6 h-6" />,
-                title: "Link de Aprovação",
-                desc: "Envie um link para seu cliente aprovar ou recusar o orçamento diretamente pelo celular.",
+                icon: (
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <line x1="3" y1="6" x2="17" y2="6" stroke="#3b6d11" strokeWidth="1.8" strokeLinecap="round" />
+                    <line x1="3" y1="10" x2="17" y2="10" stroke="#3b6d11" strokeWidth="1.8" strokeLinecap="round" />
+                    <line x1="3" y1="14" x2="12" y2="14" stroke="#3b6d11" strokeWidth="1.8" strokeLinecap="round" />
+                  </svg>
+                ),
+                title: "Histórico completo",
+                text: "Acompanhe todos os orçamentos com status em tempo real: rascunho, enviado, aprovado ou recusado.",
               },
-            ].map((f) => (
-              <Card key={f.title} className="border-0 shadow-sm hover:shadow-md transition-shadow">
-                <CardHeader>
-                  <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-2" style={{background:"#F0F5EB", color:"#3B6D11"}}>
-                    {f.icon}
-                  </div>
-                  <CardTitle className="text-lg">{f.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-500 text-sm">{f.desc}</p>
-                </CardContent>
-              </Card>
+            ].map(({ icon, title, text }) => (
+              <div key={title} style={{
+                background: "#ffffff", border: "1px solid #ebebeb",
+                borderRadius: 14, padding: "28px 24px",
+              }}>
+                <div style={{
+                  width: 40, height: 40, background: "#eaf3de", borderRadius: 10,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  marginBottom: 16,
+                }}>
+                  {icon}
+                </div>
+                <p style={{ fontSize: 15, fontWeight: 600, color: "#0f1923", margin: "0 0 8px" }}>{title}</p>
+                <p style={{ fontSize: 13, color: "#6b6b85", lineHeight: 1.65, margin: 0 }}>{text}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Comparativo */}
-      <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4" style={{color:"#2C2C2A"}}>Compare antes de comprar</h2>
-            <p className="text-gray-500">Não existe material melhor — existe o material certo para cada projeto.</p>
+      {/* ── COMO FUNCIONA ── */}
+      <section id="como-funciona" style={{
+        background: "#fafaf8",
+        borderTop: "1px solid #ebebeb",
+        borderBottom: "1px solid #ebebeb",
+        padding: "80px 48px",
+      }}>
+        <div style={{ maxWidth: 960, margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: 48 }}>
+            <p style={{ fontSize: 12, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", color: "#1a5c2a", margin: "0 0 10px" }}>
+              Como funciona
+            </p>
+            <h2 style={{ fontSize: 34, fontWeight: 700, letterSpacing: "-0.8px", lineHeight: 1.2, color: "#0f1923", margin: "0 0 12px" }}>
+              Do zero ao orçamento em 4 passos
+            </h2>
+            <p style={{ fontSize: 16, color: "#5c5c7a", lineHeight: 1.6, margin: 0 }}>
+              Simples para moradores, poderoso para profissionais.
+            </p>
           </div>
-          <div className="overflow-x-auto rounded-xl border">
-            <table className="w-full text-sm">
-              <thead>
-                <tr style={{background:"#3B6D11", color:"white"}}>
-                  <th className="py-3 px-4 text-left">Material</th>
-                  <th className="py-3 px-4 text-left">Custo (m²)</th>
-                  <th className="py-3 px-4 text-left">Durabilidade</th>
-                  <th className="py-3 px-4 text-left">Instalação</th>
-                  <th className="py-3 px-4 text-left">Ideal para</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  ["Cerâmica", "R$40–55", "10-15 anos", "Média", "Banheiros, cozinhas"],
-                  ["Porcelanato", "R$75–100", "20+ anos", "Alta", "Salas, quartos premium"],
-                  ["Piso Vinílico", "R$55–72", "7-12 anos", "Baixa", "Quartos, escritórios"],
-                ].map(([mat, custo, dur, inst, ideal], i) => (
-                  <tr key={mat} className={i % 2 === 0 ? "bg-gray-50" : "bg-white"}>
-                    <td className="py-3 px-4 font-medium">{mat}</td>
-                    <td className="py-3 px-4">{custo}</td>
-                    <td className="py-3 px-4">{dur}</td>
-                    <td className="py-3 px-4">{inst}</td>
-                    <td className="py-3 px-4 text-gray-500">{ideal}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }}>
+            {[
+              { num: "1", title: "Escolha o perfil", text: "Selecione se você é morador ou profissional autônomo" },
+              { num: "2", title: "Descreva a reforma", text: "Informe cômodo, serviço, metragem e sua região" },
+              { num: "3", title: "Receba o cálculo", text: "Materiais, mão de obra e total estimado na hora" },
+              { num: "4", title: "Exporte o PDF", text: "Proposta pronta para enviar ao cliente ou guardar" },
+            ].map(({ num, title, text }) => (
+              <div key={num} style={{ textAlign: "center" }}>
+                <div style={{
+                  width: 36, height: 36, background: "#1a5c2a", borderRadius: "50%",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  margin: "0 auto 16px", fontSize: 14, fontWeight: 700, color: "#ffffff",
+                }}>
+                  {num}
+                </div>
+                <p style={{ fontSize: 15, fontWeight: 600, color: "#0f1923", margin: "0 0 8px" }}>{title}</p>
+                <p style={{ fontSize: 13, color: "#6b6b85", lineHeight: 1.65, margin: 0 }}>{text}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Pricing */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-5xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4" style={{color:"#2C2C2A"}}>Planos para todo tipo de obra</h2>
+      {/* ── PRICING ── */}
+      <section id="pricing" style={{ background: "#ffffff", padding: "80px 48px" }}>
+        <div style={{ maxWidth: 960, margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: 48 }}>
+            <p style={{ fontSize: 12, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", color: "#1a5c2a", margin: "0 0 10px" }}>
+              Planos
+            </p>
+            <h2 style={{ fontSize: 34, fontWeight: 700, letterSpacing: "-0.8px", lineHeight: 1.2, color: "#0f1923", margin: "0 0 12px" }}>
+              Para todo tipo de obra
+            </h2>
+            <p style={{ fontSize: 16, color: "#5c5c7a", lineHeight: 1.6, margin: 0 }}>
+              Comece grátis. Escale conforme sua necessidade.
+            </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20, maxWidth: 880, margin: "0 auto" }}>
             {/* FREE */}
-            <Card className="border-2">
-              <CardHeader>
-                <Badge variant="secondary" className="w-fit mb-2">Morador</Badge>
-                <CardTitle>Gratuito</CardTitle>
-                <div className="text-3xl font-bold">R$0</div>
-                <p className="text-gray-500 text-sm">1 orçamento grátis. Orçamentos extras R$9,90/un.</p>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                {["1 orçamento gratuito", "Cálculo de materiais", "Comparativo de materiais", "Orçamentos extras R$9,90"].map(i => (
-                  <div key={i} className="flex items-center gap-2 text-sm">
-                    <Check className="w-4 h-4 text-green-600" />
-                    {i}
+            <div style={{ background: "#ffffff", border: "1px solid #ebebeb", borderRadius: 16, padding: "28px 24px" }}>
+              <p style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", color: "#1a5c2a", margin: "0 0 8px" }}>Morador</p>
+              <p style={{ fontSize: 20, fontWeight: 700, color: "#0f1923", margin: "0 0 4px" }}>Gratuito</p>
+              <p style={{ fontSize: 38, fontWeight: 700, letterSpacing: "-1px", color: "#0f1923", margin: "12px 0 4px" }}>R$0</p>
+              <p style={{ fontSize: 13, color: "#9999b0", margin: "0 0 24px" }}>1 orçamento grátis. Adicionais por R$9,90/un.</p>
+              <div style={{ marginBottom: 24 }}>
+                {["1 orçamento gratuito", "Cálculo de materiais", "Comparativo de materiais", "Pack 5 orçamentos por R$29,90"].map(f => (
+                  <div key={f} style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
+                    <div style={{ width: 16, height: 16, background: "#eaf3de", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                      <svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5L3.5 6.5L7.5 2.5" stroke="#3b6d11" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                    </div>
+                    <span style={{ fontSize: 13, color: "#0f1923" }}>{f}</span>
                   </div>
                 ))}
-                <Link href="/login">
-                  <Button className="w-full mt-4" variant="outline">Começar grátis</Button>
-                </Link>
-              </CardContent>
-            </Card>
-            {/* TRIAL */}
-            <Card className="border-2" style={{borderColor:"#3B6D11"}}>
-              <CardHeader>
-                <Badge className="w-fit mb-2" style={{background:"#3B6D11", color:"white"}}>Profissional</Badge>
-                <CardTitle>Trial</CardTitle>
-                <div className="text-3xl font-bold">7 dias grátis</div>
-                <p className="text-gray-500 text-sm">Depois R$39/mês. Cancele quando quiser.</p>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                {["Orçamentos ilimitados", "PDF com logo", "Histórico completo", "Link de aprovação para cliente", "Comparativo de materiais", "Suporte prioritário"].map(i => (
-                  <div key={i} className="flex items-center gap-2 text-sm">
-                    <Check className="w-4 h-4 text-green-600" />
-                    {i}
+              </div>
+              <Link href="/login" style={{
+                display: "block", textAlign: "center",
+                backgroundColor: "#ffffff", color: "#0f1923",
+                border: "2px solid #d0d0d0", borderRadius: 9,
+                padding: "12px", fontSize: 14, fontWeight: 600,
+                textDecoration: "none",
+              }}>
+                Começar grátis
+              </Link>
+            </div>
+
+            {/* MENSAL — DESTAQUE */}
+            <div style={{ background: "#ffffff", border: "2px solid #1a5c2a", borderRadius: 16, padding: "28px 24px", position: "relative" }}>
+              <div style={{
+                position: "absolute", top: -13, left: "50%", transform: "translateX(-50%)",
+                backgroundColor: "#1a5c2a", color: "#fff", fontSize: 11, fontWeight: 700,
+                borderRadius: 100, padding: "4px 14px", whiteSpace: "nowrap",
+              }}>
+                Mais popular
+              </div>
+              <p style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", color: "#1a5c2a", margin: "0 0 8px" }}>Profissional</p>
+              <p style={{ fontSize: 20, fontWeight: 700, color: "#0f1923", margin: "0 0 4px" }}>Mensal</p>
+              <div style={{ display: "flex", alignItems: "baseline", gap: 6, margin: "12px 0 4px" }}>
+                <span style={{ fontSize: 38, fontWeight: 700, letterSpacing: "-1px", color: "#0f1923" }}>R$39</span>
+                <span style={{ fontSize: 15, color: "#9999b0" }}>/mês · 7 dias grátis</span>
+              </div>
+              <p style={{ fontSize: 13, color: "#9999b0", margin: "0 0 24px" }}>Cancele quando quiser. Sem compromisso.</p>
+              <div style={{ marginBottom: 24 }}>
+                {["Orçamentos ilimitados", "PDF com sua logo", "Link de aprovação para cliente", "Histórico completo", "Suporte prioritário"].map(f => (
+                  <div key={f} style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
+                    <div style={{ width: 16, height: 16, background: "#eaf3de", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                      <svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5L3.5 6.5L7.5 2.5" stroke="#3b6d11" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                    </div>
+                    <span style={{ fontSize: 13, color: "#0f1923" }}>{f}</span>
                   </div>
                 ))}
-                <Link href="/login">
-                  <Button className="w-full mt-4" style={{background:"#3B6D11", color:"white"}}>
-                    Testar grátis por 7 dias
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-            {/* PRO */}
-            <Card className="border-2" style={{borderColor:"#639922"}}>
-              <CardHeader>
-                <Badge className="w-fit mb-2" style={{background:"#639922", color:"white"}}>Profissional PRO</Badge>
-                <CardTitle>PRO</CardTitle>
-                <div className="text-3xl font-bold">R$39<span className="text-lg font-normal text-gray-500">/mês</span></div>
-                <p className="text-gray-500 text-sm">Para autônomos e pequenas construtoras.</p>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                {["Tudo do Trial", "Acesso vitalício", "Propostas ilimitadas", "Exportação em PDF com sua marca"].map(i => (
-                  <div key={i} className="flex items-center gap-2 text-sm">
-                    <Check className="w-4 h-4" style={{color:"#639922"}} />
-                    {i}
+              </div>
+              <Link href="/login" style={{
+                display: "block", textAlign: "center",
+                backgroundColor: "#1a5c2a", color: "#ffffff",
+                border: "2px solid #1a5c2a", borderRadius: 9,
+                padding: "12px", fontSize: 14, fontWeight: 600,
+                textDecoration: "none",
+              }}>
+                Testar grátis por 7 dias
+              </Link>
+            </div>
+
+            {/* ANUAL */}
+            <div style={{ background: "#ffffff", border: "1px solid #ebebeb", borderRadius: 16, padding: "28px 24px" }}>
+              <p style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", color: "#1a5c2a", margin: "0 0 8px" }}>Profissional PRO</p>
+              <p style={{ fontSize: 20, fontWeight: 700, color: "#0f1923", margin: "0 0 4px" }}>Anual</p>
+              <div style={{ display: "flex", alignItems: "baseline", gap: 6, margin: "12px 0 4px" }}>
+                <span style={{ fontSize: 38, fontWeight: 700, letterSpacing: "-1px", color: "#0f1923" }}>R$29</span>
+                <span style={{ fontSize: 15, color: "#9999b0" }}>/mês · economia de 25%</span>
+              </div>
+              <p style={{ fontSize: 13, color: "#9999b0", margin: "0 0 24px" }}>Cobrado anualmente. Melhor custo-benefício.</p>
+              <div style={{ marginBottom: 24 }}>
+                {["Tudo do plano mensal", "Histórico vitalício", "Propostas ilimitadas", "Exportação com sua marca"].map(f => (
+                  <div key={f} style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
+                    <div style={{ width: 16, height: 16, background: "#eaf3de", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                      <svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5L3.5 6.5L7.5 2.5" stroke="#3b6d11" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                    </div>
+                    <span style={{ fontSize: 13, color: "#0f1923" }}>{f}</span>
                   </div>
                 ))}
-                <Link href="/login">
-                  <Button className="w-full mt-4" style={{background:"#639922", color:"white"}}>
-                    Assinar PRO
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
+              </div>
+              <Link href="/login" style={{
+                display: "block", textAlign: "center",
+                backgroundColor: "#ffffff", color: "#0f1923",
+                border: "2px solid #d0d0d0", borderRadius: 9,
+                padding: "12px", fontSize: 14, fontWeight: 600,
+                textDecoration: "none",
+              }}>
+                Assinar anual
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 border-t" style={{background:"#2C2C2A"}}>
-        <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded flex items-center justify-center" style={{background:"#3B6D11"}}>
-              <span className="text-white font-bold text-xs">R</span>
-            </div>
-            <span className="font-semibold text-white">ReformaJá</span>
+      {/* ── DEPOIMENTOS ── */}
+      <section style={{
+        background: "#fafaf8",
+        borderTop: "1px solid #ebebeb",
+        borderBottom: "1px solid #ebebeb",
+        padding: "80px 48px",
+      }}>
+        <div style={{ maxWidth: 960, margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: 48 }}>
+            <p style={{ fontSize: 12, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", color: "#1a5c2a", margin: "0 0 10px" }}>
+              Depoimentos
+            </p>
+            <h2 style={{ fontSize: 34, fontWeight: 700, letterSpacing: "-0.8px", lineHeight: 1.2, color: "#0f1923", margin: "0 0 12px" }}>
+              Quem usa, não volta ao caderninho
+            </h2>
+            <p style={{ fontSize: 16, color: "#5c5c7a", lineHeight: 1.6, margin: 0 }}>
+              Profissionais e moradores que transformaram a forma de orçar.
+            </p>
           </div>
-          <p className="text-gray-400 text-sm">© 2024 ReformaJá. Todos os direitos reservados.</p>
-          <div className="flex gap-4 text-sm text-gray-400">
-            <Link href="/privacidade" className="hover:text-white">Privacidade</Link>
-            <Link href="/termos" className="hover:text-white">Termos</Link>
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
+            {[
+              { initials: "MR", name: "Marcos Rocha", role: "Pedreiro autônomo, SP", text: "Antes eu demorava 2 dias para montar um orçamento. Agora faço em 15 minutos e ainda mando o PDF para o cliente na hora." },
+              { initials: "AF", name: "Ana Ferreira", role: "Moradora, BH", text: "Ia reformar o banheiro sem saber o custo real. O ReformaJá me deu uma estimativa precisa e evitou uma baita surpresa no meio da obra." },
+              { initials: "CL", name: "Carlos Lima", role: "Pintor autônomo, RJ", text: "O link de aprovação é incrível. O cliente aprova pelo celular e eu já tenho o aval para começar. Profissionalismo total." },
+            ].map(({ initials, name, role, text }) => (
+              <div key={name} style={{ background: "#ffffff", border: "1px solid #ebebeb", borderRadius: 14, padding: "24px" }}>
+                <div style={{ display: "flex", gap: 2, marginBottom: 14 }}>
+                  {[1, 2, 3, 4, 5].map(s => (
+                    <svg key={s} width="13" height="13" viewBox="0 0 13 13" fill="#f59f00">
+                      <path d="M6.5 1l1.5 3.2 3.5.5-2.5 2.4.6 3.5L6.5 9 3.4 10.6l.6-3.5L1.5 4.7l3.5-.5z" />
+                    </svg>
+                  ))}
+                </div>
+                <p style={{ fontSize: 14, color: "#3a3a50", lineHeight: 1.65, margin: "0 0 20px" }}>
+                  &ldquo;{text}&rdquo;
+                </p>
+                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                  <div style={{
+                    width: 36, height: 36, borderRadius: "50%", backgroundColor: "#eaf3de",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    fontSize: 12, fontWeight: 700, color: "#27500a", flexShrink: 0,
+                  }}>
+                    {initials}
+                  </div>
+                  <div>
+                    <p style={{ fontSize: 14, fontWeight: 600, color: "#0f1923", margin: 0 }}>{name}</p>
+                    <p style={{ fontSize: 12, color: "#9999b0", margin: 0 }}>{role}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── CTA FINAL ── */}
+      <section style={{ backgroundColor: "#0f2117", padding: "80px 48px", textAlign: "center" }}>
+        <div style={{ maxWidth: 960, margin: "0 auto" }}>
+          <h2 style={{ fontSize: 32, fontWeight: 700, letterSpacing: "-0.8px", color: "#ffffff", margin: "0 0 12px" }}>
+            Pronto para orçar com confiança?
+          </h2>
+          <p style={{ fontSize: 16, color: "#7aaa87", margin: "0 0 32px" }}>
+            Comece grátis hoje. Sem cartão de crédito.
+          </p>
+          <Link href="/login" style={{
+            display: "inline-block",
+            backgroundColor: "#ffffff", color: "#1a5c2a",
+            border: "2px solid #ffffff", borderRadius: 9,
+            padding: "14px 32px", fontSize: 15, fontWeight: 700,
+            textDecoration: "none",
+          }}>
+            Criar meu primeiro orçamento
+          </Link>
+        </div>
+      </section>
+
+      {/* ── FOOTER ── */}
+      <footer style={{
+        backgroundColor: "#ffffff", borderTop: "1px solid #ebebeb",
+        padding: "28px 48px",
+        display: "flex", justifyContent: "space-between",
+        alignItems: "center", flexWrap: "wrap", gap: 12,
+      }}>
+        <p style={{ fontSize: 13, color: "#9999b0", margin: 0 }}>
+          © 2026 ReformaJá. Todos os direitos reservados.
+        </p>
+        <div style={{ display: "flex", gap: 24 }}>
+          {["Privacidade", "Termos", "Contato"].map(link => (
+            <a key={link} href="#" style={{ fontSize: 13, color: "#9999b0", textDecoration: "none" }}>{link}</a>
+          ))}
         </div>
       </footer>
+
     </div>
   )
 }
