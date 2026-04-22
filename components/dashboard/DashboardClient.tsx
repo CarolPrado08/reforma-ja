@@ -2,33 +2,47 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { PlusCircle, FileText, Clock, CheckCircle, XCircle } from "lucide-react"
+import { PlusCircle, FileText, Clock, CheckCircle, XCircle, Send, Building2 } from "lucide-react"
 import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
 
 const statusConfig: Record<string, { label: string; color: string; icon: any }> = {
   RASCUNHO: { label: "Rascunho", color: "#6B7280", icon: Clock },
-  ENVIADO: { label: "Enviado", color: "#3B6D11", icon: FileText },
+  ENVIADO:  { label: "Enviado",  color: "#3B6D11", icon: Send },
   APROVADO: { label: "Aprovado", color: "#16A34A", icon: CheckCircle },
   RECUSADO: { label: "Recusado", color: "#DC2626", icon: XCircle },
 }
 
-export function DashboardClient({ orcamentos, user }: { orcamentos: any[]; user: any }) {
-  const totalGasto = orcamentos.reduce((acc, o) => acc + o.totalGeral, 0)
+type Props = {
+  orcamentos: any[]
+  user: { tipo?: string | null; nomeEmpresa?: string | null } | null
+}
+
+export function DashboardClient({ orcamentos, user }: Props) {
+  const isProfissional = user?.tipo === "PROFISSIONAL"
+  const totalGeral = orcamentos.reduce((acc, o) => acc + o.totalGeral, 0)
+  const aprovados = orcamentos.filter((o) => o.status === "APROVADO").length
+  const pendentes = orcamentos.filter((o) => o.status === "ENVIADO").length
 
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold" style={{color:"#2C2C2A"}}>Dashboard</h1>
-          <p className="text-gray-500 text-sm mt-1">Seus orçamentos de reforma</p>
+          <h1 className="text-2xl font-bold" style={{color:"#2C2C2A"}}>
+            {isProfissional ? "Minhas propostas" : "Meus orçamentos"}
+          </h1>
+          <p className="text-gray-500 text-sm mt-1">
+            {isProfissional
+              ? user?.nomeEmpresa ? `${user.nomeEmpresa} · Histórico de propostas` : "Histórico de propostas para clientes"
+              : "Suas estimativas de reforma"}
+          </p>
         </div>
         <Link href="/dashboard/novo">
           <Button style={{background:"#3B6D11", color:"white"}}>
             <PlusCircle className="w-4 h-4 mr-2" />
-            Novo Orçamento
+            {isProfissional ? "Nova proposta" : "Novo orçamento"}
           </Button>
         </Link>
       </div>
@@ -37,37 +51,65 @@ export function DashboardClient({ orcamentos, user }: { orcamentos: any[]; user:
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
         <Card>
           <CardContent className="pt-6">
-            <p className="text-sm text-gray-500">Total de orçamentos</p>
+            <p className="text-sm text-gray-500">{isProfissional ? "Total de propostas" : "Total de orçamentos"}</p>
             <p className="text-3xl font-bold mt-1">{orcamentos.length}</p>
           </CardContent>
         </Card>
-        <Card>
-          <CardContent className="pt-6">
-            <p className="text-sm text-gray-500">Aprovados</p>
-            <p className="text-3xl font-bold mt-1 text-green-600">
-              {orcamentos.filter((o) => o.status === "APROVADO").length}
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="pt-6">
-            <p className="text-sm text-gray-500">Valor total estimado</p>
-            <p className="text-3xl font-bold mt-1">
-              {totalGasto.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
-            </p>
-          </CardContent>
-        </Card>
+
+        {isProfissional ? (
+          <>
+            <Card>
+              <CardContent className="pt-6">
+                <p className="text-sm text-gray-500">Aprovadas pelos clientes</p>
+                <p className="text-3xl font-bold mt-1 text-green-600">{aprovados}</p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="pt-6">
+                <p className="text-sm text-gray-500">Aguardando resposta</p>
+                <p className="text-3xl font-bold mt-1" style={{color:"#d97706"}}>{pendentes}</p>
+              </CardContent>
+            </Card>
+          </>
+        ) : (
+          <>
+            <Card>
+              <CardContent className="pt-6">
+                <p className="text-sm text-gray-500">Aprovados</p>
+                <p className="text-3xl font-bold mt-1 text-green-600">{aprovados}</p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="pt-6">
+                <p className="text-sm text-gray-500">Valor total estimado</p>
+                <p className="text-3xl font-bold mt-1">
+                  {totalGeral.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
+                </p>
+              </CardContent>
+            </Card>
+          </>
+        )}
       </div>
 
       {/* List */}
       {orcamentos.length === 0 ? (
         <Card className="text-center py-12">
           <CardContent>
-            <FileText className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-            <h3 className="font-semibold text-gray-600 mb-1">Nenhum orçamento ainda</h3>
-            <p className="text-gray-400 text-sm mb-4">Crie seu primeiro orçamento de reforma agora.</p>
+            {isProfissional
+              ? <Building2 className="w-12 h-12 text-gray-300 mx-auto mb-3" />
+              : <FileText className="w-12 h-12 text-gray-300 mx-auto mb-3" />}
+            <h3 className="font-semibold text-gray-600 mb-1">
+              {isProfissional ? "Nenhuma proposta ainda" : "Nenhum orçamento ainda"}
+            </h3>
+            <p className="text-gray-400 text-sm mb-4">
+              {isProfissional
+                ? "Crie sua primeira proposta e envie o link de aprovação ao cliente."
+                : "Crie seu primeiro orçamento de reforma agora."}
+            </p>
             <Link href="/dashboard/novo">
-              <Button style={{background:"#3B6D11", color:"white"}}>Criar orçamento</Button>
+              <Button style={{background:"#3B6D11", color:"white"}}>
+                {isProfissional ? "Criar proposta" : "Criar orçamento"}
+              </Button>
             </Link>
           </CardContent>
         </Card>
@@ -88,7 +130,7 @@ export function DashboardClient({ orcamentos, user }: { orcamentos: any[]; user:
                         <div>
                           <p className="font-medium text-sm">{o.comodo} — {o.tipoServico}</p>
                           <p className="text-gray-400 text-xs mt-0.5">
-                            {o.metragem}m² • {o.regiao} • {format(new Date(o.createdAt), "dd/MM/yyyy", { locale: ptBR })}
+                            {o.metragem}m² · {o.regiao} · {format(new Date(o.createdAt), "dd/MM/yyyy", { locale: ptBR })}
                           </p>
                         </div>
                       </div>

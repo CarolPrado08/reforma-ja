@@ -13,6 +13,11 @@ enum Plan {
   PRO
 }
 
+enum UserTipo {
+  MORADOR
+  PROFISSIONAL
+}
+
 enum OrcamentoStatus {
   RASCUNHO
   ENVIADO
@@ -31,20 +36,26 @@ enum ItemTipo {
 }
 
 model User {
-  id                     String    @id @default(cuid())
+  id                     String     @id @default(cuid())
   name                   String?
-  email                  String    @unique
+  email                  String     @unique
   emailVerified          DateTime?
   image                  String?
-  plan                   Plan      @default(FREE)
+  plan                   Plan       @default(FREE)
+  tipo                   UserTipo?
+  nomeEmpresa            String?
+  cnpj                   String?
+  logoUrl                String?
+  telefone               String?
+  empresaConfigurada     Boolean    @default(false)
   trialEndsAt            DateTime?
-  stripeCustomerId       String?   @unique
+  stripeCustomerId       String?    @unique
   stripePriceId          String?
-  stripeSubscriptionId   String?   @unique
+  stripeSubscriptionId   String?    @unique
   stripeCurrentPeriodEnd DateTime?
-  orcamentosCreditos     Int       @default(0)
-  createdAt              DateTime  @default(now())
-  updatedAt              DateTime  @updatedAt
+  orcamentosCreditos     Int        @default(0)
+  createdAt              DateTime   @default(now())
+  updatedAt              DateTime   @updatedAt
   accounts               Account[]
   sessions               Session[]
   orcamentos             Orcamento[]

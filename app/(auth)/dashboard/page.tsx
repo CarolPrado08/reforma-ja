@@ -9,7 +9,7 @@ export default async function DashboardPage() {
 
   const user = await db.user.findUnique({
     where: { id: session.user.id },
-    select: { plan: true, orcamentosCreditos: true },
+    select: { plan: true, orcamentosCreditos: true, tipo: true, nomeEmpresa: true },
   })
 
   const orcamentos = await db.orcamento.findMany({

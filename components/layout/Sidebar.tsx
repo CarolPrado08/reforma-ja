@@ -2,18 +2,28 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { LayoutDashboard, PlusCircle, Settings, LogOut } from "lucide-react"
+import { LayoutDashboard, PlusCircle, Settings, LogOut, Building2, AlertCircle } from "lucide-react"
 import { signOut } from "next-auth/react"
 import { cn } from "@/lib/utils"
 
-const nav = [
+const navBase = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/dashboard/novo", label: "Novo Orçamento", icon: PlusCircle },
   { href: "/settings/billing", label: "Plano & Cobrança", icon: Settings },
 ]
 
-export function Sidebar({ user }: { user: any }) {
+type Props = {
+  user: any
+  userTipo?: string | null
+  empresaConfigurada?: boolean
+}
+
+export function Sidebar({ user, userTipo, empresaConfigurada }: Props) {
   const path = usePathname()
+
+  const nav = userTipo === "PROFISSIONAL"
+    ? [...navBase, { href: "/settings/empresa", label: "Minha Empresa", icon: Building2 }]
+    : navBase
 
   return (
     <aside className="w-64 flex flex-col min-h-screen" data-sidebar style={{background:"#2D5209"}}>
@@ -24,7 +34,22 @@ export function Sidebar({ user }: { user: any }) {
           </div>
           <span className="font-bold text-white text-lg">ReformaJá</span>
         </div>
+        {userTipo && (
+          <span className="mt-2 inline-block text-xs px-2 py-0.5 rounded-full" style={{
+            background: userTipo === "PROFISSIONAL" ? "#639922" : "#1a5c2a",
+            color: "#fff",
+          }}>
+            {userTipo === "PROFISSIONAL" ? "Profissional" : "Morador"}
+          </span>
+        )}
       </div>
+
+      {userTipo === "PROFISSIONAL" && !empresaConfigurada && (
+        <Link href="/settings/empresa" className="mx-3 mt-3 p-3 rounded-lg flex items-start gap-2" style={{background:"#f59e0b20", border:"1px solid #f59e0b60"}}>
+          <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" style={{color:"#f59e0b"}} />
+          <p className="text-xs" style={{color:"#fbbf24"}}>Configure sua empresa para gerar propostas profissionais.</p>
+        </Link>
+      )}
 
       <nav className="flex-1 p-4 space-y-1">
         {nav.map(({ href, label, icon: Icon }) => (

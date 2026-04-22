@@ -11,17 +11,26 @@ export default async function AuthLayout({ children }: { children: React.ReactNo
 
   const user = await db.user.findUnique({
     where: { id: session.user.id },
-    select: { plan: true, trialEndsAt: true, stripeCurrentPeriodEnd: true },
+    select: {
+      plan: true,
+      tipo: true,
+      nomeEmpresa: true,
+      empresaConfigurada: true,
+      trialEndsAt: true,
+      stripeCurrentPeriodEnd: true,
+    },
   })
 
   if (!user) redirect("/login")
+
+  if (!user.tipo) redirect("/onboarding")
 
   const showTrialBanner = isTrialActive(user)
   const daysLeft = daysLeftInTrial(user)
 
   return (
     <div className="flex min-h-screen">
-      <Sidebar user={session.user} />
+      <Sidebar user={session.user} userTipo={user.tipo} empresaConfigurada={user.empresaConfigurada} />
       <main className="flex-1 flex flex-col">
         {showTrialBanner && <TrialBanner daysLeft={daysLeft} />}
         <div className="flex-1 p-6">{children}</div>

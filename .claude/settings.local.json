@@ -19,7 +19,18 @@
       "Bash(npx shadcn@latest add dropdown-menu table avatar tooltip)",
       "Bash(npx storybook@latest init --yes)",
       "Bash(npx tsc:*)",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(gh auth:*)",
+      "Bash(gh repo:*)",
+      "Bash(vercel --version)",
+      "Bash(npx neon:*)",
+      "Bash(vercel whoami:*)",
+      "Bash(vercel --yes --repo CarolPrado08/reforma-ja)",
+      "Bash(vercel link:*)",
+      "Bash(vercel --yes)",
+      "Bash(vercel env:*)",
+      "Bash(vercel --prod --yes)"
     ]
   }
 }

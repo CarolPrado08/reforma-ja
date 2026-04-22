@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
 
   const user = await db.user.findUnique({
     where: { id: session.user.id },
-    select: { plan: true, orcamentosCreditos: true },
+    select: { plan: true, orcamentosCreditos: true, tipo: true },
   })
 
   if (!user) return NextResponse.json({ error: "User not found" }, { status: 404 })
@@ -54,11 +54,12 @@ export async function POST(req: NextRequest) {
 
   const data = parsed.data
   const calc = calcularOrcamento(data.tipoServico, data.metragem, data.regiao, data.margemImprevisto)
+  const modo = user.tipo ?? "MORADOR"
 
   const orcamento = await db.orcamento.create({
     data: {
       userId: session.user.id,
-      modo: data.modo,
+      modo,
       comodo: data.comodo,
       tipoServico: data.tipoServico,
       metragem: data.metragem,
@@ -67,7 +68,7 @@ export async function POST(req: NextRequest) {
       totalMateriais: calc.totalMateriais,
       totalMaoDeObra: calc.totalMaoDeObra,
       totalGeral: calc.totalGeral,
-      linkAprovacao: data.modo === "PROFISSIONAL" ? nanoid(16) : null,
+      linkAprovacao: modo === "PROFISSIONAL" ? nanoid(16) : null,
       itens: {
         create: [
           {

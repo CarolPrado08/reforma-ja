@@ -12,19 +12,18 @@ import { COMODOS, TIPOS_SERVICO, REGIOES, COMPARATIVO_MATERIAIS } from "@/lib/or
 import { toast } from "sonner"
 import { ArrowLeft, ArrowRight, Calculator } from "lucide-react"
 
-const STEPS = ["Modo", "Cômodo", "Serviço", "Metragem", "Região", "Revisão"]
+const STEPS = ["Cômodo", "Serviço", "Metragem", "Região", "Revisão"]
 
-export function OrcamentoForm({ user }: { user: any }) {
+type Props = { user: any; modo: "MORADOR" | "PROFISSIONAL" }
+
+export function OrcamentoForm({ user, modo }: Props) {
   const router = useRouter()
   const [step, setStep] = useState(0)
   const [loading, setLoading] = useState(false)
 
   const form = useForm<OrcamentoInput>({
     resolver: zodResolver(orcamentoSchema),
-    defaultValues: {
-      modo: "MORADOR",
-      margemImprevisto: 0.1,
-    },
+    defaultValues: { margemImprevisto: 0.1 },
   })
 
   const { watch, setValue, handleSubmit, formState: { errors } } = form
@@ -38,7 +37,7 @@ export function OrcamentoForm({ user }: { user: any }) {
       const res = await fetch("/api/orcamentos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, modo }),
       })
       if (res.status === 402) {
         toast.error("Limite atingido. Adquira mais orçamentos nas configurações.")
@@ -67,31 +66,8 @@ export function OrcamentoForm({ user }: { user: any }) {
 
       <Card>
         <CardContent className="pt-6 space-y-6">
-          {/* Step 0: Modo */}
+          {/* Step 0: Cômodo */}
           {step === 0 && (
-            <div>
-              <CardHeader className="px-0 pt-0"><CardTitle>Você é:</CardTitle></CardHeader>
-              <div className="grid grid-cols-2 gap-3">
-                {[
-                  { value: "MORADOR", label: "Morador", desc: "Quero reformar minha casa" },
-                  { value: "PROFISSIONAL", label: "Profissional", desc: "Sou autônomo ou construtora" },
-                ].map(({ value, label, desc }) => (
-                  <button
-                    key={value}
-                    type="button"
-                    onClick={() => setValue("modo", value as any)}
-                    className={`p-4 rounded-xl border-2 text-left transition-all ${values.modo === value ? "border-green-600 bg-green-50" : "border-gray-200 hover:border-gray-300"}`}
-                  >
-                    <p className="font-semibold text-sm">{label}</p>
-                    <p className="text-xs text-gray-500 mt-1">{desc}</p>
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Step 1: Comodo */}
-          {step === 1 && (
             <div>
               <CardHeader className="px-0 pt-0"><CardTitle>Qual cômodo?</CardTitle></CardHeader>
               <div className="grid grid-cols-3 gap-2">
@@ -109,8 +85,8 @@ export function OrcamentoForm({ user }: { user: any }) {
             </div>
           )}
 
-          {/* Step 2: Tipo Servico */}
-          {step === 2 && (
+          {/* Step 1: Tipo Serviço */}
+          {step === 1 && (
             <div>
               <CardHeader className="px-0 pt-0"><CardTitle>Tipo de serviço</CardTitle></CardHeader>
               <div className="space-y-2">
@@ -135,8 +111,8 @@ export function OrcamentoForm({ user }: { user: any }) {
             </div>
           )}
 
-          {/* Step 3: Metragem */}
-          {step === 3 && (
+          {/* Step 2: Metragem */}
+          {step === 2 && (
             <div>
               <CardHeader className="px-0 pt-0"><CardTitle>Metragem (m²)</CardTitle></CardHeader>
               <input
@@ -171,8 +147,8 @@ export function OrcamentoForm({ user }: { user: any }) {
             </div>
           )}
 
-          {/* Step 4: Regiao */}
-          {step === 4 && (
+          {/* Step 3: Região */}
+          {step === 3 && (
             <div>
               <CardHeader className="px-0 pt-0"><CardTitle>Sua região</CardTitle></CardHeader>
               <div className="grid grid-cols-2 gap-2">
@@ -190,13 +166,13 @@ export function OrcamentoForm({ user }: { user: any }) {
             </div>
           )}
 
-          {/* Step 5: Revisão */}
-          {step === 5 && (
+          {/* Step 4: Revisão */}
+          {step === 4 && (
             <div>
               <CardHeader className="px-0 pt-0"><CardTitle>Revisão do orçamento</CardTitle></CardHeader>
               <div className="space-y-2 text-sm">
                 {[
-                  ["Modo", values.modo === "MORADOR" ? "Morador" : "Profissional"],
+                  ["Perfil", modo === "MORADOR" ? "Morador" : "Profissional"],
                   ["Cômodo", values.comodo],
                   ["Serviço", TIPOS_SERVICO.find(t => t.key === values.tipoServico)?.label ?? values.tipoServico],
                   ["Metragem", `${values.metragem} m²`],
@@ -209,6 +185,14 @@ export function OrcamentoForm({ user }: { user: any }) {
                   </div>
                 ))}
               </div>
+              {modo === "PROFISSIONAL" && (
+                <div className="mt-4 p-3 rounded-lg text-sm" style={{ background: "#eaf3de", border: "1px solid #b5d98a" }}>
+                  <p className="font-medium" style={{ color: "#1a5c2a" }}>Link de aprovação será gerado</p>
+                  <p className="text-xs mt-1" style={{ color: "#27500a" }}>
+                    Após criar, você receberá um link único para enviar ao seu cliente aprovar o orçamento.
+                  </p>
+                </div>
+              )}
             </div>
           )}
         </CardContent>
